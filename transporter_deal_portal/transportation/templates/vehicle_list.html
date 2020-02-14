@@ -1,0 +1,65 @@
+
+<!--<h1> {{vehicles.0.transporter.name}} </h1>&ndash;&gt;-->
+<!--<html>-->
+<!--<table>-->
+<!--    <tr>-->
+<!--        <td> # </td>-->
+<!--&lt;!&ndash;        <td> Vehicle Type </td>&ndash;&gt;-->
+<!--        <td> Edit Vehicle </td>-->
+<!--        <td> Delete Vehicle </td>-->
+<!--    </tr>-->
+<!--{% for vehicle in vehicles %}-->
+<!--    <tr>-->
+<!--        <td> {{vehicle}}</td>-->
+<!--&lt;!&ndash;        <td> {{vehicle.type}} </td>&ndash;&gt;-->
+<!--        <td> <a href="#" > Edit Vehicle </a> </td>-->
+<!--        <td> <a href="#" > Delete Vehicle</a> </td>-->
+<!--    </tr>-->
+<!--{% endfor %}-->
+<!--</table>-->
+<!--</html>-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Employee Records</title>
+     {% load staticfiles %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}"/>
+</head>
+<body>
+<table class="table table-striped table-bordered table-sm">
+    <thead class="thead-dark">
+    <tr>
+        <th>Vehicle ID</th>
+        <th>Vehicle Type</th>
+        <th>Vehicle model</th>
+        <th>Vehicle Color</th>
+        <th>Vehicle Manufacturing Year</th>
+        <th>Vehicle Capacity</th>
+<!--        <th>Vehicle Picture</th>-->
+        <th>Vehicle Document</th>
+
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+{% for vehicle in vehicles %}
+    <tr>
+        <td>{{ vehicle.id }}</td>
+        <td>{{ vehicle.vehicle_type}}</td>
+        <td>{{ vehicle.model }}</td>
+        <td>{{ vehicle.color }}</td>
+        <td>{{ vehicle.man_Year }}</td>
+        <td>{{ vehicle.capacity }}</td>
+<!--        <td>{{ vehicle.picture }}</td>-->
+        <td>{{ vehicle.document }}</td>
+        <td>
+            <a href="/edit/{{ employee.id }}"><span class="glyphicon glyphicon-pencil" >Edit</span></a>
+            <a href="/delete/{{ employee.id }}">Delete</a>
+        </td>
+    </tr>
+{% endfor %}
+    </tbody>
+</table>
+</body>
+</html>
