@@ -27,6 +27,7 @@ def vehicle_list(request):
 
 def edit_vehicle(request, id):
     vehicle = Vehicle.objects.get(id=id)
+    import pdb;pdb.set_trace()
     return render(request, 'edit_vehicle.html', {'vehicle': vehicle})
 
 
