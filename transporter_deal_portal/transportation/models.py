@@ -73,11 +73,19 @@ class Deal(models.Model):
         return self.Deal.id
 
 
-class Query(models.Model):
-    c_request = models.TextField(default="Handle with Care")
-    t_response = models.TextField(default="yes")
+class QueryRequest(models.Model):
+    c_request = models.TextField(default="")
     username = models.ForeignKey(Profile, on_delete=models.CASCADE)
     deal = models.ForeignKey(Deal, on_delete=models.CASCADE)
 
     def __unicode__(self):
-        return self.Query
+        return self.QueryRequest.id
+
+
+class QueryResponse(models.Model):
+    t_response = models.TextField(default="")
+    username = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    request_id = models.OneToOneField(QueryRequest, on_delete=models.CASCADE)
+
+    def __unicode__(self):
+        return self.QueryResponse.id

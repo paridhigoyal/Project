@@ -20,7 +20,7 @@
         <th>Deal Price</th>
         <th>Vehicle ID</th>
 
-<!--        <th>Actions</th>-->
+        <th>Actions</th>
     </tr>
     </thead>
     <tbody>
@@ -33,7 +33,7 @@
         <td>{{ deal.end_city }}</td>
         <td>{{ deal.price }}</td>
         <td>{{ deal.vehicle_id }}</td>
-
+    <td> <a href="{% url 'ask-query' deal.deal_id %}" > Ask Query </a></td>
 
     </tr>
 

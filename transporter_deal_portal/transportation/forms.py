@@ -37,14 +37,6 @@ class MyCustomSignupForm(SignupForm):
         return user
 
 
-# class CustomerForm(ModelForm):
-#     class Meta:
-#         model=Profile
-#
-# class TransporterForm(ModelForm):
-#     class Meta:
-
-
 class VehicleForm(ModelForm):
     class Meta:
         model = Vehicle
@@ -61,9 +53,28 @@ class DealForm(ModelForm):
         fields = '__all__'
 
 
-class QueryForm(ModelForm):
+class SearchForm(ModelForm):
+    start_city = forms.CharField(required=False)
+    end_city = forms.CharField(required=False)
+    start_Date = forms.DateField(required=False)
+    end_date = forms.DateField(required=False)
+
     class Meta:
-        model = Query
+        model = Deal
+        fields = ['start_city', 'end_city', 'start_Date', 'end_date']
+
+
+class QueryRequestForm(ModelForm):
+
+    class Meta:
+        model = QueryRequest
+        fields = '__all__'
+        widgets = {'deal': forms.HiddenInput(), 'username': forms.HiddenInput()}
+
+
+class QueryResponseForm(ModelForm):
+    class Meta:
+        model = QueryResponse
         fields = '__all__'
 
 

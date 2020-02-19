@@ -21,9 +21,10 @@
     <a href="{%url 'vehicle-list'  %}">View Vehicle</a></br>
     <a href="{%url 'deal-list'  %}">View Deals</a></br></br>
 <form action="" method="get">
-    <input name="start city" type="text" placeholder="Start City"></br></br>
-    <input name="end city" type="text" placeholder="End City"></br></br>
-
+<!--    <input name="start city" type="text" placeholder="Start City"></br></br>-->
+<!--    <input name="end city" type="text" placeholder="End City"></br></br>-->
+    {% csrf_token %}
+    {{form.as_p}}
     <input type="submit" value="Search" >
 </form>
 <!--    <form action="" method="get">-->

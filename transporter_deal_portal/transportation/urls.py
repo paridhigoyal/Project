@@ -14,4 +14,7 @@ urlpatterns = [
     path('delete-deal/<int:deal_id>', views.delete_deal, name='delete-deal'),
     path('view-deal/<int:deal_id>', views.view_deal, name='view-deal'),
     path('view-image/<int:id>', views.view_image, name='view-image'),
+    path('ask-query/<int:deal_id>', views.ask_query, name='ask-query'),
+    path('view-query/<int:deal_id>', views.view_query, name='view-query'),
+    path('response-query/<int:request_id_id>', views.response_query, name='response-query')
     ]

@@ -1,28 +1,30 @@
 from django.contrib.auth.models import User
 from django.db.models import Q
 from django.shortcuts import render, redirect
-from .models import Vehicle, Deal
+from .models import Vehicle, Deal, QueryRequest, QueryResponse
 from django.http import HttpResponseRedirect
 from django.urls import reverse
-from .forms import VehicleForm, DealForm
+from .forms import VehicleForm, DealForm, SearchForm, QueryRequestForm, QueryResponseForm
 from allauth.account.views import LoginView
 
 
 def index(request):
-    queryset = request.GET.get('start city')
-    queryset1 = request.GET.get('end city')
-    queryset2 = request.GET.get('start date')
-    queryset3 = request.GET.get('end date')
+    queryset = request.GET.get('start_city')
+    queryset1 = request.GET.get('end_city')
+    queryset2 = request.GET.get('start_Date')
+    queryset3 = request.GET.get('end_date')
     if queryset and queryset1:
         deal_lists = Deal.objects.filter(Q(start_city__icontains=queryset), Q(end_city__icontains=queryset1))
-        context = {'deal_lists': deal_lists}
+        if queryset2 and queryset3:
+            deal_lists = deal_lists.filter(Q(start_Date=queryset2), Q(end_date=queryset3))
+        form = SearchForm()
+        context = {'deal_lists': deal_lists, 'form': form}
+
         return render(request, 'transporter_index.html', context)
-    # if queryset2 and queryset3:
-    #     deal_lists = Deal.objects.filter(Q(start_Date=queryset2), Q(end_date=queryset3))
-    #     context = {'deal_lists': deal_lists}
-    #     return render(request, 'transporter_index.html', context)
+
     else:
-        return render(request, 'transporter_index.html')
+        form = SearchForm()
+        return render(request, 'transporter_index.html', {'form': form})
 
 
 def add_vehicle(request):
@@ -99,7 +101,31 @@ def edit_deal(request, deal_id):
 def view_image(request, id):
     vehicle = Vehicle.objects.get(id=id)
     return render(request, 'view_image.html', {'vehicle': vehicle})
-# def search_deal_by_date(request, start_Date, end_date):
-#     deal_lists = Deal.objects.filter(Q(start_Date=start_Date),Q(end_date=end_date))
-#     context={'deal_lists': deal_lists}
-#     return render(request, 'transporter_index.html')
+
+
+def ask_query(request, deal_id):
+    if request.method == 'POST':
+        form = QueryRequestForm(request.POST)
+        form.save()
+        return HttpResponseRedirect(reverse('view-query'))
+    form = QueryRequestForm(initial={'username': request.user.profile.id, 'deal': deal_id})
+    return render(request, 'ask_query.html', {'form': form})
+
+
+def view_query(request, deal_id):
+    query = QueryRequest.objects.get(deal_id=deal_id)
+    return render(request, 'view_query.html', {'query': query})
+
+
+def response_query(request, request_id_id):
+    # form1 = QueryResponse.objects.get(request_id_id=request_id_id)
+    if request.method == 'POST':
+        form = QueryResponseForm(request.POST)
+        form.save()
+        return HttpResponseRedirect(reverse('view-response'))
+    form = QueryResponseForm()
+    import pdb;pdb.set_trace()
+    context = {'form': form,
+               "request_id_id":request_id_id}
+    return render(request, 'response_query.html', {'form': form})
+
