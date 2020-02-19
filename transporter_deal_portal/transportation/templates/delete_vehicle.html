@@ -9,12 +9,10 @@
                 {% csrf_token %}
                 <div class="form-row">
                     <div class="alert alert-warning">
-                        Are you sure you want to delete {{ vehicle.id }}?
+                        Are you sure you want to delete {{ vehicle }}?
+                        <input type="submit" value="Submit">
                     </div>
                 </div>
-                <button type="submit" class="btn btn-danger">
-                    <span class="glyphicon glyphicon-trash"></span>
-                </button>
             </form>
         </div>
     </div>

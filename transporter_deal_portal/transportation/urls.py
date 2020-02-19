@@ -7,7 +7,11 @@ urlpatterns = [
     path('add-vehicle/', views.add_vehicle, name='add-vehicle'),
     path('vehicles/', views.vehicle_list, name='vehicle-list'),
     path('create-deal/', views.create_deal, name='create-deal'),
-    path('edit-vehicle/<int:id>', views.edit_vehicle, name ='edit-vehicle'),
-    path('update-vehicle/<int:id>', views.update_vehicle,name='update-vehicle'),
+    path('edit-vehicle/<int:id>', views.update_vehicle, name ='edit-vehicle'),
     path('delete-vehicle/<int:id>', views.delete_vehicle, name='delete-vehicle'),
-]
+    path('deals/', views.deal_list, name='deal-list'),
+    path('edit-deal/<int:deal_id>', views.edit_deal, name='edit-deal'),
+    path('delete-deal/<int:deal_id>', views.delete_deal, name='delete-deal'),
+    path('view-deal/<int:deal_id>', views.view_deal, name='view-deal'),
+    path('view-image/<int:id>', views.view_image, name='view-image'),
+    ]

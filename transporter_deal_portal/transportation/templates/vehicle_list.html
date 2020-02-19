@@ -1,30 +1,8 @@
 
-<!--<h1> {{vehicles.0.transporter.name}} </h1>&ndash;&gt;-->
-<!--<html>-->
-<!--<table>-->
-<!--    <tr>-->
-<!--        <td> # </td>-->
-<!--&lt;!&ndash;        <td> Vehicle Type </td>&ndash;&gt;-->
-<!--        <td> Edit Vehicle </td>-->
-<!--        <td> Delete Vehicle </td>-->
-<!--    </tr>-->
-<!--{% for vehicle in vehicles %}-->
-<!--    <tr>-->
-<!--        <td> {{vehicle}}</td>-->
-<!--&lt;!&ndash;        <td> {{vehicle.type}} </td>&ndash;&gt;-->
-<!--        <td> <a href="#" > Edit Vehicle </a> </td>-->
-<!--        <td> <a href="#" > Delete Vehicle</a> </td>-->
-<!--    </tr>-->
-<!--{% endfor %}-->
-<!--</table>-->
-<!--</html>-->
-<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
-    <title>Employee Records</title>
-     {% load staticfiles %}
-    <link rel="stylesheet" href="{% static 'css/style.css' %}"/>
+    <title>Vehicle list</title>
 </head>
 <body>
 <table class="table table-striped table-bordered table-sm">
@@ -36,7 +14,7 @@
         <th>Vehicle Color</th>
         <th>Vehicle Manufacturing Year</th>
         <th>Vehicle Capacity</th>
-<!--        <th>Vehicle Picture</th>-->
+        <th>Vehicle Picture</th>
         <th>Vehicle Document</th>
 
         <th>Actions</th>
@@ -51,11 +29,12 @@
         <td>{{ vehicle.color }}</td>
         <td>{{ vehicle.man_Year }}</td>
         <td>{{ vehicle.capacity }}</td>
-<!--        <td>{{ vehicle.picture }}</td>-->
+<!--        <td><img src="{{ vehicle.picture.url }}"> </td>-->
+        <td><a href="{%url 'view-image' vehicle.id %}">View Image</a></td>
         <td>{{ vehicle.document }}</td>
         <td>
-            <a href="/edit-vehicle/{{ vehicle.id }}"><span class="glyphicon glyphicon-pencil" >Edit</span></a>
-            <a href="/delete-vehicle/{{ vehicle.id }}">Delete</a>
+            <a href="{%url 'edit-vehicle' vehicle.id %}">Edit</a>
+            <a href="{% url 'delete-vehicle' vehicle.id %}">Delete</a>
         </td>
     </tr>
 {% endfor %}

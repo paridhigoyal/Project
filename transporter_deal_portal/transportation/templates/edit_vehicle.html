@@ -1,66 +1,8 @@
-!DOCTYPE html>  
-<html lang="en">
-<body>  
-<form method="POST" class="post-form" action="/update-vehicle/{{vehicle.id}}">
-        {% csrf_token %}  
-    <div class="container">  
-<br>  
-    <div class="form-group row">  
-    <label class="col-sm-1 col-form-label"></label>  
-    <div class="col-sm-4">  
-    <h3>Update Details</h3>  
-    </div>  
-  </div>  
-    <div class="form-group row">  
-    <label class="col-sm-2 col-form-label">Vehicle Id:</label>
-    <div class="col-sm-4">  
-        <input type="text" name="id" id="id" required maxlength="20" value="{{ vehicle.id }}"/>
-    </div>  
-  </div>  
-  <div class="form-group row">  
-    <label class="col-sm-2 col-form-label">Vehicle Type:</label>
-    <div class="col-sm-4">  
-        <input type="text" name="vehicle_type" id="id_vehicle_type" required maxlength="20" value="{{ vehicle.vehicle_type }}" />
-    </div>  
-  </div>  
-    <div class="form-group row">  
-    <label class="col-sm-2 col-form-label">Vehicle Model:</label>
-    <div class="col-sm-4">  
-        <input type="text" name="model" id="id_model" required maxlength="30" value="{{ vehicle.model }}" />
-    </div>  
-  </div>  
-    <div class="form-group row">  
-    <label class="col-sm-2 col-form-label">Vehicle Color:</label>
-    <div class="col-sm-4">  
-        <input type="text" name="color" id="id_color" required maxlength="15" value="{{ vehicle.color }}" />
-    </div>  
-  </div>
-        <div class="form-group row">
-    <label class="col-sm-2 col-form-label">Vehicle Manufacturing Year:</label>
-    <div class="col-sm-4">
-        <input type="text" name="man_Year" id="id_man_Year" required maxlength="15" value="{{ vehicle.man_Year }}" />
-    </div>
-  </div>
-        <div class="form-group row">
-    <label class="col-sm-2 col-form-label">Vehicle Capacity:</label>
-    <div class="col-sm-4">
-        <input type="text" name="capacity" id="id_capacity" required maxlength="15" value="{{ vehicle.capacity }}" />
-    </div>
-  </div>
-        <div class="form-group row">
-    <label class="col-sm-2 col-form-label">Vehicle Document:</label>
-        <div class="col-sm-4">
-        <input type="text" name="document" id="id_document" required maxlength="15" value="{{ vehicle.document }}" />
-    </div>
-  </div>
+<html>
+<body>
+<form method="post" action="" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{form.as_p}}
 
-    <div class="form-group row">  
-    <label class="col-sm-1 col-form-label"></label>  
-    <div class="col-sm-4">  
-    <button type="submit" class="btn btn-success">Update</button>  
-    </div>  
-  </div>  
-    </div>  
-</form>  
-</body>  
-</html>  
+    <input type="submit" value="Submit">
+</form>

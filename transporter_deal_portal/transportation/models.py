@@ -35,7 +35,7 @@ class Vehicle(models.Model):
     color = models.CharField(max_length=15)
     man_Year = models.IntegerField()
     capacity = models.IntegerField()
-    picture = models.ImageField(null=True)
+    picture = models.ImageField(null=True, upload_to="gallery")
     document = models.CharField(max_length=100)
     transporter = models.ForeignKey(Profile, on_delete=models.CASCADE, default="")
 
@@ -70,7 +70,7 @@ class Deal(models.Model):
     rating = models.OneToOneField(Rating, on_delete=models.CASCADE, null=True)
 
     def __unicode__(self):
-        return self.deal_id
+        return self.Deal.id
 
 
 class Query(models.Model):

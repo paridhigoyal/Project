@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'demo_form',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
 ]
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
@@ -57,6 +58,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
 ]
 
 ROOT_URLCONF = 'transporter_deal_portal.urls'
@@ -134,11 +136,12 @@ USE_L10N = True
 
 USE_TZ = True
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/2.2/howto/static-files/
+
 
 STATIC_URL = '/static/'
 LOGIN_REDIRECT_URL = 'home'
 # LOGOUT_REDIRECT_URL = '/'
 # LOGIN_REDIRECT_URL = 'home'
 # LOGOUT_REDIRECT_URL = 'home'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'upload')
+MEDIA_URL = '/upload/'

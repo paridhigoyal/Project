@@ -35,6 +35,8 @@ class MyCustomSignupForm(SignupForm):
 
         p.save()
         return user
+
+
 # class CustomerForm(ModelForm):
 #     class Meta:
 #         model=Profile
@@ -51,9 +53,21 @@ class VehicleForm(ModelForm):
 
 
 class DealForm(ModelForm):
-    rating=forms.CharField(required=False)
+    rating = forms.CharField(required=False)
+
     # customer = forms.CharField(required=False)
     class Meta:
         model = Deal
         fields = '__all__'
 
+
+class QueryForm(ModelForm):
+    class Meta:
+        model = Query
+        fields = '__all__'
+
+
+class RatingForm(ModelForm):
+    class Meta:
+        model = Rating
+        fields = '__all__'

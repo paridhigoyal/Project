@@ -13,6 +13,7 @@
     <tr>
         <td> {{author.id}}</td>
         <td> {{author.name}} </td>
+
         <td> <a href="{% url 'book-list' author.id %}" > View Books </a> </td>
         <td> <a href="{% url 'add-book' %}" > Add Book </a> </td>
     </tr>
