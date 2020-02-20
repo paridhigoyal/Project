@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect
 from .models import Vehicle, Deal, QueryRequest, QueryResponse
 from django.http import HttpResponseRedirect
 from django.urls import reverse
-from .forms import VehicleForm, DealForm, SearchForm, QueryRequestForm, QueryResponseForm
+from .forms import VehicleForm, DealForm, SearchForm, QueryRequestForm, QueryResponseForm, RatingForm
 from allauth.account.views import LoginView
 
 
@@ -107,25 +107,41 @@ def ask_query(request, deal_id):
     if request.method == 'POST':
         form = QueryRequestForm(request.POST)
         form.save()
-        return HttpResponseRedirect(reverse('view-query'))
+        # import pdb;pdb.set_trace()
+        return HttpResponseRedirect(reverse('view-query', args=[deal_id]))
     form = QueryRequestForm(initial={'username': request.user.profile.id, 'deal': deal_id})
     return render(request, 'ask_query.html', {'form': form})
 
 
 def view_query(request, deal_id):
-    query = QueryRequest.objects.get(deal_id=deal_id)
+    query = QueryRequest.objects.filter(deal_id=deal_id)
+    # import pdb;pdb.set_trace()
     return render(request, 'view_query.html', {'query': query})
 
 
-def response_query(request, request_id_id):
-    # form1 = QueryResponse.objects.get(request_id_id=request_id_id)
+def response_query(request, request_id):
     if request.method == 'POST':
         form = QueryResponseForm(request.POST)
         form.save()
         return HttpResponseRedirect(reverse('view-response'))
-    form = QueryResponseForm()
-    import pdb;pdb.set_trace()
+    form = QueryResponseForm(initial={'username': request.user.profile.id, 'request_id': request_id})
     context = {'form': form,
-               "request_id_id":request_id_id}
-    return render(request, 'response_query.html', {'form': form})
+               "request_id_id": request_id}
+    return render(request, 'response_query.html', context)
 
+
+def view_response(request, request_id):
+    query = QueryResponse.objects.get(request_id=request_id)
+    return render(request, 'view_response.html', {'query': query})
+
+
+def give_rating(request, deal_id):
+    if request.POST == 'POST':
+        form = RatingForm(request.POST)
+        form.save()
+        return HttpResponseRedirect(reverse('view-rating'))
+
+    form = RatingForm(initial={'transporter': request.user.profile, 'deal_id': deal_id})
+    # import pdb;pdb.set_trace()
+
+    return render(request, 'give_rating.html', {'form': form})

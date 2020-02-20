@@ -16,5 +16,7 @@ urlpatterns = [
     path('view-image/<int:id>', views.view_image, name='view-image'),
     path('ask-query/<int:deal_id>', views.ask_query, name='ask-query'),
     path('view-query/<int:deal_id>', views.view_query, name='view-query'),
-    path('response-query/<int:request_id_id>', views.response_query, name='response-query')
+    path('response-query/<int:request_id>', views.response_query, name='response-query'),
+    path('view-response/<int:request_id>', views.view_response, name='view-response'),
+    path('give-rating/<int:deal_id>', views.give_rating, name='give-rating')
     ]

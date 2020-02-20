@@ -43,20 +43,6 @@ class Vehicle(models.Model):
         return self.Vehicle.id
 
 
-class Rating(models.Model):
-    rate = (('1', 'Worst Experience'), ('2', 'Bad Experience',),
-            ('3', 'Good Experience'), ('4', 'Very Good Experience'),
-            ('5', 'Excellent Experience')
-            )
-    rating = models.CharField(max_length=1, choices=rate)
-    transporter = models.ForeignKey(Profile, on_delete=models.CASCADE)
-
-    # deal_id = models.OneToOneField(Deal, on_delete=models.CASCADE, default="")
-
-    def __str__(self):
-        return self.transporter.user.username
-
-
 class Deal(models.Model):
     deal_id = models.IntegerField(primary_key=True)
     start_Date = models.DateField()
@@ -67,10 +53,22 @@ class Deal(models.Model):
     # transporter = models.ManyToManyField(Profile)
     customer = models.ForeignKey(Profile, on_delete=models.CASCADE)
     vehicle_id = models.OneToOneField(Vehicle, on_delete=models.CASCADE)
-    rating = models.OneToOneField(Rating, on_delete=models.CASCADE, null=True)
 
     def __unicode__(self):
         return self.Deal.id
+
+
+class Rating(models.Model):
+    rate = (('1', 'Worst Experience'), ('2', 'Bad Experience',),
+            ('3', 'Good Experience'), ('4', 'Very Good Experience'),
+            ('5', 'Excellent Experience')
+            )
+    rating = models.CharField(max_length=1, choices=rate)
+    transporter = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    deal_id = models.OneToOneField(Deal, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.transporter.user.username
 
 
 class QueryRequest(models.Model):

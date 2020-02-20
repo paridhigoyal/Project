@@ -45,9 +45,6 @@ class VehicleForm(ModelForm):
 
 
 class DealForm(ModelForm):
-    rating = forms.CharField(required=False)
-
-    # customer = forms.CharField(required=False)
     class Meta:
         model = Deal
         fields = '__all__'
@@ -65,7 +62,6 @@ class SearchForm(ModelForm):
 
 
 class QueryRequestForm(ModelForm):
-
     class Meta:
         model = QueryRequest
         fields = '__all__'
@@ -76,9 +72,16 @@ class QueryResponseForm(ModelForm):
     class Meta:
         model = QueryResponse
         fields = '__all__'
+        widgets = {'request_id': forms.HiddenInput(), 'username': forms.HiddenInput()}
 
 
 class RatingForm(ModelForm):
+    rate = (('1', 'Worst Experience'), ('2', 'Bad Experience',),
+            ('3', 'Good Experience'), ('4', 'Very Good Experience'),
+            ('5', 'Excellent Experience')
+            )
+    rating = forms.CharField(max_length=1, widget=forms.Select(choices=rate))
+
     class Meta:
         model = Rating
         fields = '__all__'
